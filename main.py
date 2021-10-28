@@ -29,7 +29,7 @@ rich_presence = input(f'\x1b[38;5;56m> \033[37mRich Presence (\x1b[38;5;56mY\033
 os.system('cls')
 
 def check_token():
-    if requests.get("https://discord.com/api/v8/users/@me", headers={"Authorization": f'{token}'}).status_code == 200:
+    if requests.get("https://discord.com/api/v9/users/@me", headers={"Authorization": f'{token}'}).status_code == 200:
         return "user"
     else:
         return "bot"
@@ -94,7 +94,7 @@ class Avery:
 
     def Payment(self):
         try:
-            r = requests.get("https://discordapp.com/api/v8/users/@me/billing/payment-sources", headers={'Authorization': f'{token}'})
+            r = requests.get("https://discordapp.com/api/v9/users/@me/billing/payment-sources", headers={'Authorization': f'{token}'})
             if 'id' in r.text:
                 return 'True'
             else:
@@ -104,7 +104,7 @@ class Avery:
 
     def Nitro(self):
         try:
-            r = requests.get('https://discordapp.com/api/v8/users/@me', headers={"Authorization": f'{token}'})
+            r = requests.get('https://discordapp.com/api/v9/users/@me', headers={"Authorization": f'{token}'})
             if 'premium_type' in r.text:
                 if r.json()['premium_type'] == 0:
                     return 'None'
@@ -119,7 +119,7 @@ class Avery:
 
     def Information(self):
         try:
-            r = requests.get('https://discordapp.com/api/v8/users/@me', headers={"Authorization": f'{token}'})
+            r = requests.get('https://discordapp.com/api/v9/users/@me', headers={"Authorization": f'{token}'})
             if 'id' in r.text:
                 return r.json()
             else:
@@ -172,7 +172,7 @@ class Avery:
 
     def BanMembers(self, guild, member):
         while True:
-            r = requests.put(f"https://discord.com/api/v8/guilds/{guild}/bans/{member}", headers=headers)
+            r = requests.put(f"https://discord.com/api/v9/guilds/{guild}/bans/{member}", headers=headers)
             if 'retry_after' in r.text:
                 time.sleep(r.json()['retry_after'])
             else:
@@ -184,7 +184,7 @@ class Avery:
 
     def KickMembers(self, guild, member):
         while True:
-            r = requests.put(f"https://discord.com/api/v8/guilds/{guild}/members/{member}", headers=headers)
+            r = requests.put(f"https://discord.com/api/v9/guilds/{guild}/members/{member}", headers=headers)
             if 'retry_after' in r.text:
                 time.sleep(r.json()['retry_after'])
             else:
@@ -196,7 +196,7 @@ class Avery:
 
     def DeleteChannels(self, guild, channel):
         while True:
-            r = requests.delete(f"https://discord.com/api/v8/channels/{channel}", headers=headers)
+            r = requests.delete(f"https://discord.com/api/v9/channels/{channel}", headers=headers)
             if 'retry_after' in r.text:
                 time.sleep(r.json()['retry_after'])
             else:
@@ -208,7 +208,7 @@ class Avery:
           
     def DeleteRoles(self, guild, role):
         while True:
-            r = requests.delete(f"https://discord.com/api/v8/guilds/{guild}/roles/{role}", headers=headers)
+            r = requests.delete(f"https://discord.com/api/v9/guilds/{guild}/roles/{role}", headers=headers)
             if 'retry_after' in r.text:
                 time.sleep(r.json()['retry_after'])
             else:
@@ -221,7 +221,7 @@ class Avery:
     def SpamChannels(self, guild, name):
         while True:
             json = {'name': name, 'type': 0}
-            r = requests.post(f'https://discord.com/api/v8/guilds/{guild}/channels', headers=headers, json=json)
+            r = requests.post(f'https://discord.com/api/v9/guilds/{guild}/channels', headers=headers, json=json)
             if 'retry_after' in r.text:
                 time.sleep(r.json()['retry_after'])
             else:
@@ -234,7 +234,7 @@ class Avery:
     def SpamRoles(self, guild, name):
         while True:
             json = {'name': name}
-            r = requests.post(f'https://discord.com/api/v8/guilds/{guild}/roles', headers=headers, json=json)
+            r = requests.post(f'https://discord.com/api/v9/guilds/{guild}/roles', headers=headers, json=json)
             if 'retry_after' in r.text:
                 time.sleep(r.json()['retry_after'])
             else:
